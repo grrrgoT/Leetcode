@@ -1,17 +1,35 @@
-class Solution(oject):
-    def twoSum(self, numbers, target):
-        start = 0
-        end = len(numbers) - 1
-        while start < end:
-            total = numbers[start] + numbers[end]
+class Solution(object):
+    def twoSum(self, nums, target):
+        res = []
+        nums.sorted()
 
-            if total == target:
-                return [start + 1, end + 1]
-            elif total < target:
-                start += 1
-            else:
-                end -= 1
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
 
-        return [-1, -1]
+            j = i + 1
+            k = len(nums) - 1
+
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+
+                if total > 0:
+                    k -= 1
+                elif total < 0:
+                    j += 1
+                else:
+                    res.append([nums[i], nums[j], nums[k]])
+                    j += 1
+                    
+                    while nums[j] == nums[j - 1] and j < k:
+                        j += 1
+                        while nums[j] == nums[j - 1] and j < k:
+                            j += 1
+
+        
+        return res
+
+
+            
 
     
